@@ -30,7 +30,7 @@ export default function Chat() {
                 {
                     headers: {
                         "Content-Type": "application/json",
-                        "Authorization": `Bearer  ${import.meta.env.VITE_SOME_API}`,
+                        "Authorization": `Bearer  ${import.meta.env.VITE_API_KEY}`,
                     }
                 }
             )
