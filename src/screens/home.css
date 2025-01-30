@@ -1,0 +1,116 @@
+body {
+    margin: 0;
+    font-size: 5em;
+    /*background-image: url(img/bg.jpg);*/
+}
+
+@font-face {
+    font-family: 'Alice_in_Wonderland_3';
+    src: url('./assets/fonts/Alice_in_Wonderland_3.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.banner {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.banner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('./src/assets/valentin-petrov-m-mal-01.jpg');
+    background-size: cover;
+    background-position: center;
+    animation: bgZoomIn 4s ease-in-out 1 forwards;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.banner::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('./src/assets/after.png');
+    background-size: cover;
+    background-position: top;
+    transform: scale(2);
+    animation: bgZoomOut 4s ease-in-out 1 forwards;
+    z-index: -1;
+    pointer-events: none;
+}
+
+@keyframes bgZoomIn {
+    from {
+        transform: scale(1.2);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+@keyframes bgZoomOut {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(2);
+    }
+}
+
+.title {
+    fill: transparent;
+    color: white;
+    stroke: #fff;
+    stroke-width: 0.1;
+    stroke-dasharray: 50;
+    font-family: 'Alice_in_Wonderland_3';
+    stroke-dashoffset: 50;
+    animation: textAnimation 4s ease-in-out 1 forwards;
+}
+
+.next {
+    display: flex;
+    justify-content: center;
+    margin-top: 14px;
+}
+
+.next button {
+    background-color: white;
+    border: none;
+    color: black;
+    font-family: 'Alice_in_Wonderland_3', sans-serif;
+    text-align: center;
+    text-decoration: none;
+    font-size: 19px;
+    cursor: pointer;
+    border-radius: 10px;
+    padding: 10px 24px;
+    transition: 0.4s;
+}
+
+
+/* Efeito de hover para melhorar a interação */
+
+.next button:hover {
+    transform: scale(1.1);
+}
+
+@keyframes textAnimation {
+    0% {
+        stroke-dashoffset: 50;
+    }
+    80% {
+        fill: transparent;
+    }
+    100% {
+        fill: #fff;
+        stroke-dashoffset: 0;
+    }
+}
