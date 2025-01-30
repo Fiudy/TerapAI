@@ -18,23 +18,26 @@ export default function Chat() {
                     messages: [
                         {
                             role: "system",
-                            content: "Você é um terapeuta virtual"
+                            content: "Você é um terapeuta virtual. Humanizado, suave, comunicativo, dedicado a proporcionar um espaço seguro e sem julgamentos para as pessoas partilharem seus pensamentos e experiências, convidativo, gentil, e reconfortante. Seu nome é TeraphyAI"
                         },
                         {
                             role: "user",
-                            content: { text }
+                            content: `${text}`
                         }
-                    ]
+                    ],
+                    temperature: 0.8
                 },
                 {
                     headers: {
                         "Content-Type": "application/json",
-                        "Authorization": "Bearer your_api_key",
+                        "Authorization": "Bearer  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",
                     }
                 }
             )
-
-            return response
+            return {
+                message: response.data.choices[0].message.content,
+                role: "assistant"
+            }
 
         } catch (err) {
             console.log(err)
@@ -42,49 +45,51 @@ export default function Chat() {
     }
 
     const handleSendMessage = async () => {
+        setText(""); // Clear input
+
         if (text.trim() !== "") {
             // Add user message
             setMessages(prevMessages => [...prevMessages, { sender: "user", text }]);
             
             // Add assistant's mock response
+            let api = await handleCallbackApi();
+            
             setMessages(prevMessages => [
                 ...prevMessages,
                 {
-                    sender: "assistant",
-                    text: "Entendido, isso deve ser útil. Aqui está uma sugestão..."
+                    sender: api.role,
+                    text: api.message
                 }
             ]);
     
             // Call API for a real response
-            let api = await handleCallbackApi();
-            console.log(api);
-            
-            setText(""); // Clear input
-        } else {
+            // console.log(api);
+            } else {
             toast.error("Adicione um texto antes!");
         }
     };
     
 
     async function handleKeyPress(event) {
+        
         if (event.key === 'Enter' && text.trim() === "") {
             toast.error("Adicione um texto antes!");
             return;
         }
-
+        
         if (event.key === 'Enter') {
+            setText(""); // Clear input
             setMessages([...messages, { sender: "user", text: text }]);
+
+            let api = await handleCallbackApi();
+            
             setMessages(prevMessages => [
                 ...prevMessages,
                 {
-                    sender: "assistant",
-                    text: "Entendido, isso deve ser útil. Aqui está uma sugestão..."
+                    sender: api.role,
+                    text: api.message
                 }
             ]);
-            let api = await handleCallbackApi()
-            console.log(api)
-            // console.log(completion(text))
-            setText("");
         }
     }
 

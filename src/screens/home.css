@@ -42,6 +42,7 @@ h1{
     fill: transparent;
     color: white;
     stroke: #fff;
+    font-size: 6rem;
     stroke-width: 0.1;
     stroke-dasharray: 50;
     stroke-dashoffset: 50;
