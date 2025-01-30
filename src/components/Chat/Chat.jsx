@@ -30,7 +30,7 @@ export default function Chat() {
                 {
                     headers: {
                         "Content-Type": "application/json",
-                        "Authorization": "Bearer  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",
+                        "Authorization": `Bearer  ${import.meta.env.VITE_SOME_API}`,
                     }
                 }
             )
