@@ -1,15 +1,5 @@
-import OpenAI from "openai";
+import axios from "axios"
 
-const openai = new OpenAI({
-    apiKey: "minha api",
-});
-
-const completion = openai.chat.completions.create({
-    model: "gpt-4o-mini",
-    store: true,
-    messages: [
-        { "role": "user", "content": "write a haiku about ai" },
-    ],
-});
-
-completion.then((result) => console.log(result.choices[0].message));
+export const baseUrl = axios.create({
+    baseURL: "https://api.openai.com/v1/chat"
+})

@@ -11,7 +11,7 @@ const Home = () => {
   return (
     <div>
       <div className="banner">
-        <h1 className="title">TerapAI</h1>
+        <h1 className="title">Terap<strong>IA</strong></h1>
         <div className="next">
           <button onClick={handleButtonClick}>Começar</button>
         </div>
