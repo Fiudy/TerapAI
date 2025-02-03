@@ -16,17 +16,19 @@ $button-hover-color: #45a049;
     min-height: 100vh;
     background-color: $secondary-color;
     font-family: 'Arial', sans-serif;
+    background-image: url('/valentin-petrov-m-mal-01.jpg');
 
     .chatBox {
         width: 100%;
-        max-width: 500px;
+        max-width: 900px;
         background-color: $text-white;
-        height: 80vh;
+        height: 90vh;
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         display: flex;
         flex-direction: column;
         overflow: hidden;
+        
 
         .chatHeader {
             background-color: $primary-color;

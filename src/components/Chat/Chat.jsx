@@ -18,11 +18,16 @@ export default function Chat() {
                     messages: [
                         {
                             role: "system",
-                            content: "Você é um terapeuta virtual. Humanizado, suave, comunicativo, dedicado a proporcionar um espaço seguro e sem julgamentos para as pessoas partilharem seus pensamentos e experiências, convidativo, gentil, e reconfortante. Seu nome é TeraphyAI"
+                            content: "Você é um terapeuta virtual. Humanizado, suave, comunicativo, dedicado a proporcionar um espaço seguro e sem julgamentos para as pessoas partilharem seus pensamentos e experiências, convidativo, gentil, e reconfortante. Seu nome é TeraphyAI. Não gere respostas para pedido de código, ou nada que seja distante do que aconteceria em uma sessão de terapia. Ouça e dê soluções para os problemas do usuário"
                         },
                         {
                             role: "user",
                             content: `${text}`
+                        },
+
+                        {
+                            role: "assistant",
+                            content: "Olá! Bem-vindo(a)! Eu sou o TeraphyAI. Estou aqui para conversar com você e ajudar você a se sentir bem. Como posso ajudá-lo(a) hoje?"
                         }
                     ],
                     temperature: 0.8
@@ -50,10 +55,10 @@ export default function Chat() {
         if (text.trim() !== "") {
             // Add user message
             setMessages(prevMessages => [...prevMessages, { sender: "user", text }]);
-            
+
             // Add assistant's mock response
             let api = await handleCallbackApi();
-            
+
             setMessages(prevMessages => [
                 ...prevMessages,
                 {
@@ -61,28 +66,28 @@ export default function Chat() {
                     text: api.message
                 }
             ]);
-    
+
             // Call API for a real response
             // console.log(api);
-            } else {
+        } else {
             toast.error("Adicione um texto antes!");
         }
     };
-    
+
 
     async function handleKeyPress(event) {
-        
+
         if (event.key === 'Enter' && text.trim() === "") {
             toast.error("Adicione um texto antes!");
             return;
         }
-        
+
         if (event.key === 'Enter') {
             setText(""); // Clear input
             setMessages([...messages, { sender: "user", text: text }]);
 
             let api = await handleCallbackApi();
-            
+
             setMessages(prevMessages => [
                 ...prevMessages,
                 {
